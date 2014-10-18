@@ -32,7 +32,7 @@ function initialize() {
                 allEventIds.push(response.data[i].id);
             }
             for (var i = 0; i < allEventIds.length; ++i) {
-                var url = "https://graph.facebook.com/" + allEventIds[i];
+                var url = "https://graph.facebook.com/v2.1/" + allEventIds[i];
                 var request = new XMLHttpRequest();
                 request.onload = processData;
                 request.open("GET", url, true);
