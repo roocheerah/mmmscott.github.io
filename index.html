@@ -15,6 +15,23 @@
 </script>
 	</head>
 	<body>
+		<script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '955986817751920',
+		      xfbml      : true,
+		      version    : 'v2.1'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
 		<div id="sidebar">
 			<h1>ForageUW</h1>
 			<button id="add">Add Event</button><br>
@@ -24,5 +41,11 @@
 
 		</div>
 		<div id="map-canvas"></div>	
+		<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 	</body>
 </html>
