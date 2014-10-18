@@ -99,7 +99,7 @@ function initialize() {
     function attachInfoWindow(marker, contentString) {
         var infoWindow = new google.maps.InfoWindow({
             content: contentString,
-            minWidth: 100   
+            maxWidth: 300   
         });
 
         google.maps.event.addListener(marker, "click", function () {
