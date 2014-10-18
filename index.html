@@ -14,12 +14,13 @@
 	</head>
 	<body>
 		<script>
+			var accessKey;
 			function initalizeFB() {
     			function statusChangeCallback(response) {
                 
                 if (response.status === 'connected') {
                     // Logged into your app and Facebook.
-                    var accessKey = response.authResponse.accessToken;
+                    accessKey = response.authResponse.accessToken;
                     console.log(accessKey);
                 } else if (response.status === 'not_authorized') {
                     
@@ -58,6 +59,7 @@
 			
 		  
 		</script>
+		<script type="text/javascript" src="js/app.js"></script>
 		<div id="sidebar">
 			<h1>ForageUW</h1>
 			<button id="add">Add Event</button><br>
@@ -72,5 +74,5 @@
 
 
 	</body>
-	    	<script type="text/javascript" src="js/app.js"></script>
+	    	
 </html>
