@@ -28,10 +28,8 @@ function initialize() {
             for (var i = 0; i < allEventIds.length; ++i) {
                 FB.api("/" + allEventIds[i], function(response) {
                     parseFacebookData(response);
-                });
-                
+                });   
             }
-            console.log(allEventIds);
         });
     }
 
@@ -46,10 +44,11 @@ function initialize() {
 
     //function that parses the given facebook event info and tries to get out the description of it and the location
     function parseFacebookData(response) {
-        var desc = response.description;
+        var name = response.name;
         var location = response.location;
 
-        console.log(desc + " " + location);
+
+        console.log(name + " " + location);
            /* for (var i = 0; i < eventElm.length; i++) {
                 var name = eventElm[i].name;
                 var location = eventElm[i].location;
