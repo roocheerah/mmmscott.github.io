@@ -28,6 +28,7 @@ function initialize() {
     function findEvents() {
         FB.api('/search?q="98105"&type=event', function(response) {
             console.log(response);
+            console.log(response[0].id);
         });
     }
 
