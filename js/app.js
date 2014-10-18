@@ -19,22 +19,22 @@ function initialize() {
     var eventLoc = [];
 
     function findEvents() {
-        FB.api('/search?q=98195&type=event', function(response) {
+        FB.api('/search?q=98105&type=event', function(response) {
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
             }
+            FB.api('/search?q=98195&type=event', function(response) {
+                for (var i = 0; i < response.data.length; ++i) {
+                    allEventIds.push(response.data[i].id);
+                }
+                console.log(allEventIds);
+                for (var i = 0; i < allEventIds.length; ++i) {
+                    FB.api("/" + allEventIds[i], function(response) {
+                        parseFacebookData(response);
+                    });   
+                }
+            });
         });
-        FB.api('/search?q=98195&type=event', function(response) {
-            for (var i = 0; i < response.data.length; ++i) {
-                allEventIds.push(response.data[i].id);
-            }
-        });
-        console.log(allEventIds);
-        for (var i = 0; i < allEventIds.length; ++i) {
-            FB.api("/" + allEventIds[i], function(response) {
-                parseFacebookData(response);
-            });   
-        }
     }
 
     //makes a new google maps object using the latitudes and longitudes
