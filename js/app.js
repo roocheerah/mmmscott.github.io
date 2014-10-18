@@ -53,32 +53,42 @@ function initialize() {
         if (checkTime(startTime, endTime)) {
             processData(desc, location);
         }
-
-
-       // console.log(name + " " + location);
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
     function processData(description, location) {
         if (description) {
-        var free = "free";
-        var lines = description.split("\n");
-        console.log(lines);
-        for (var i = 0; i < lines.length; i++) {    
-            var wordsInTitle = lines[i].split(" ");
-            if (wordsInTitle) {
-                for (var j = 0; j < wordsInTitle.length; j++) {
-                    if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                        geocodeLocation(location);
+            var free = "free";
+            var lines = description.split("\n");
+            console.log(lines);
+            for (var i = 0; i < lines.length; i++) {    
+                var wordsInTitle = lines[i].split(" ");
+                if (wordsInTitle) {
+                    for (var j = 0; j < wordsInTitle.length; j++) {
+                        if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
+                            geocodeLocation(location);
+                        }
                     }
                 }
-            }
-        }       
-    }
+            }       
+        }
     } 
 
     function geocodeLocation(location) {
         console.log(location);  
+        var geoCoder = new google.maps.Geocoder();
+        var address = location;
+        geoCoder.gecode({'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            //map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+        });
     }
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
