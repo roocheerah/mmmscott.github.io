@@ -66,6 +66,7 @@ function initialize() {
         var lines = description.split("\n");
         for (var i = 0; i < lines.length; i++) {    
             var wordsInTitle = lines[i].split(" ");
+            console.log(wordsInTitle);
             if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
                 geocodeLocation(location);
             }
