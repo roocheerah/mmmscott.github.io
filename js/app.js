@@ -61,6 +61,7 @@ function initialize() {
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
     function processData(description, location) {
+        if (description) {
         var free = "free";
         var lines = description.split("\n");
         for (var i = 0; i < lines.length; i++) {    
@@ -69,6 +70,7 @@ function initialize() {
                 geocodeLocation(location);
             }
         }       
+    }
     } 
 
     function geocodeLocation(location) {
