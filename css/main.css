@@ -1,3 +1,9 @@
+
+@import url("http://fonts.googleapis.com/css?family=Oswald");
+@import url("http://fonts.googleapis.com/css?family=Lobster");
+@import url("http://fonts.googleapis.com/css?family=Lato");
+
+
 html, body , #map-canvas{ 
 	height: 100%; 
 	margin: 0; 
@@ -5,12 +11,72 @@ html, body , #map-canvas{
 }
 
 #map-canvas { 
+	visibility: hidden;
 	height: 100%;
 	width: 70%;
 	float: right;
 
 }
 
-#sidebar {
-	float: left;
-}	
+body {
+  background: #ffffff;
+  text-align: center;
+  padding-top: 5em;
+}
+
+input {
+  height: 2em;
+  font-size: 1.5em;
+  font-family: 'Lato'
+}
+.title {
+  font-family: 'Lobster', cursive;
+  font-size:  6em;
+  color: #8C182B;
+  line-height: 1.5;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+button {
+  -webkit-appearance: button-bevel;
+  font-size: 1.5em;
+  padding: 1em;
+  margin: 1em;
+  border-radius: .5em;
+  background-color:#B9CE6C;
+  font-family: 'Oswald'
+}
+
+button:hover {
+  background-color: #8C182B;
+  color: #FFFFFF;
+  transition: all 0.5s ease;
+}
+
+h1 {
+  font: normal 4.5em/1.1 'Oswald', Arial, sans-serif;
+  color: #3A205B;
+  text-transform: uppercase;
+  border: .125em solid #3A205B;
+  display: inline-block;
+  border-radius: .2em;
+  padding: .075em .075em 0;
+  vertical-align: super;
+
+  -webkit-mask-image: url(http://f.cl.ly/items/131E0X1b1i0X1s263R00/a.png);
+  -webkit-transform: rotate(-5deg);
+
+  -moz-mask-image: url(http://f.cl.ly/items/131E0X1b1i0X1s263R00/a.png);
+  -moz-transform: rotate(-5deg);
+
+  -o-mask-image: url(http://f.cl.ly/items/131E0X1b1i0X1s263R00/a.png);
+  -o-transform: rotate(-5deg);
+
+  mask-image: url(http://f.cl.ly/items/131E0X1b1i0X1s263R00/a.png);
+  transform: rotate(-5deg);
+}
