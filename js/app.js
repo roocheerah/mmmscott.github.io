@@ -76,6 +76,7 @@ function initialize() {
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
     function checkDate(start, end){
+        if (end) {
         var splitDate = end.split("-");
         for (var i = 0; i < splitDate.length; i+=3) {
             var year = parseInt(splitDate[i]);
@@ -96,6 +97,8 @@ function initialize() {
         }else{
             return true;
         }
+    } else { 
+        return true; }
     }
 
     //check if the event time is still valid
