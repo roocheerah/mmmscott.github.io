@@ -106,6 +106,7 @@ function initialize() {
 
     //check if the event time is still valid
     function checkTime(start, end){
+        if (end) {
         var splitTime1 = end.split("T");
         var midSplit = splitTime1[1].split("-");
         var splitTime2 = midSplit[0].split(":");
@@ -126,6 +127,7 @@ function initialize() {
         }else{
             return true;
         }
+    }
     }
 
 
