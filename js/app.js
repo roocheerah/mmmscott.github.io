@@ -120,7 +120,7 @@ function initialize() {
         }else if (year == currentdate.getFullYear()) {
             if(month < currentdate.getMonth()){
                 return false;
-            }else if(month == currentdate.getMonth(){
+            }else if(month == currentdate.getMonth()) {
                 return (day - currentdate.getDate() >= 0) && checkTime(start, end);
             }else{
                 return true;
