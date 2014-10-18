@@ -1,3 +1,19 @@
+Skip to content
+ This repository
+Explore
+Gist
+Blog
+Help
+mmmscott mmmscott
+ 
+1  Watch 
+  Star 0
+ Fork 1roocheerah/dubhacks
+forked from mmmscott/dubhacks
+ branch: master  dubhacks / js / app.js
+roocheerahroocheerah 22 seconds ago Update app.js
+2 contributors mmmscottroocheerah
+204 lines (178 sloc)  6.901 kb RawBlameHistory   
 "use strict";
 
 function initialize() {
@@ -78,7 +94,11 @@ function initialize() {
                 var name = eventElm[i].name;
                 var location = eventElm[i].location;
                 var eventID = eventElm[i].id;
-                processData(eventID);
+                var start_time = json.start_time;
+                var end_time = json.end_time;
+                if (checkDate(start_time, end_time)) {
+                    processData(eventID);
+                }
             }
         }
     }
@@ -98,6 +118,55 @@ function initialize() {
                 var longitude = venue.longitude;
             }
         }       
+    }
+
+
+    //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
+    function checkDate(start, end){
+        var splitDate = end.split("-");
+        for (var i = 0; i < splitDate.length; i+=3) {
+            var year = parseInt(splitDate[i]);
+            var month = parseInt(splitDate[i+1]);
+            var day = parseInt(splitDate[i+2]);
+        }
+        var currentdate = new Date();
+        if(year < currentdate.getFullYear()){ 
+            return false; 
+        }else if (year == currentdate.getFullYear()) {
+            if(month < currentdate.getMonth()){
+                return false;
+            }else if(month == currentdate.getMonth(){
+                return (day - currentdate.getDate() >= 0) && checkTime(start, end);
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+    //check if the event time is still valid
+    function checkTime(start, end){
+        var splitTime1 = end.split("T");
+        var midSplit = splitTime1[1].split("-");
+        var splitTime2 = midSplit[0].split(":");
+        var hour = splitTime2[0];
+        var min = splitTime2[1];
+        var sec = splitTime2[2];
+        var currentdate = new Date();
+        if(hour < currentdate.getHours()){ 
+            return false; 
+        }else if (hour == currentdate.getHours()) {
+            if(min < currentdate.getMinutes()){
+                return false;
+            }else if(min == currentdate.getMinutes(){
+                return (sec - currentdate.getSeconds() >= 0);
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
     }
 
 
