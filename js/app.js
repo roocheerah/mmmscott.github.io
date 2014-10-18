@@ -51,12 +51,12 @@ function initialize() {
         var endTime = response.end_time;
 
         if (checkTime(startTime, endTime)) {
-            processData(startTime, desc, location);
+            processData(startTime, desc, location, name);
         }
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
-    function processData(sDate, description, location) {
+    function processData(sDate, description, location, name) {
         if (description) {
             var free = "free";
             var lines = description.split("\n");
@@ -66,7 +66,7 @@ function initialize() {
                 if (wordsInTitle) {
                     for (var j = 0; j < wordsInTitle.length; j++) {
                         if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                            geocodeLocation(sDate, description, location);
+                            geocodeLocation(sDate, description, location, name);
                         }
                     }
                 }
@@ -74,7 +74,7 @@ function initialize() {
         }
     } 
 
-    function geocodeLocation(sDate, description, location) {
+    function geocodeLocation(sDate, description, location, name) {
         console.log(location);  
         var geoCoder = new google.maps.Geocoder();
         var address = location;
@@ -87,7 +87,7 @@ function initialize() {
                 });
                 var eventDate = sDate.split("T")[0];
                 var contentString = '<p>Start Date: ' + eventDate + '</p>' +
-                    '<p>Description: ' + description + '</p>';
+                    '<p>Event Name: ' + name + '</p>';
                 attachInfoWindow(marker, contentString);
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
