@@ -45,41 +45,33 @@ function initialize() {
     //function that parses the given facebook event info and tries to get out the description of it and the location
     function parseFacebookData(response) {
         var name = response.name;
+        var desc = response.description;
         var location = response.location;
+        var startTime = response.start_time;
+        var endTime = response.end_time;
+        if (checkDate(startTime, endTime)) {
+            processData(description, location);
+        }
 
 
         console.log(name + " " + location);
-           /* for (var i = 0; i < eventElm.length; i++) {
-                var name = eventElm[i].name;
-                var location = eventElm[i].location;
-                var eventID = eventElm[i].id;
-                var start_time = json.start_time;
-                var end_time = json.end_time;
-                if (checkDate(start_time, end_time)) {
-                    processData(eventID);
-                }
-            }*/
-        
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
-    function processData(){
-        if (this.status == 200) { 
-        var json = JSON.parse(this.responseText);
-        console.log(json);
-        var description = json.description;
+    function processData(description, location) {
         var free = "free";
         var lines = description.split("\n");
         for (var i = 0; i < lines.length; i++) {    
             var wordsInTitle = lines[i].split(" ");
             if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                var venue = json.venue;                     //it is usually in their description....
-                var latitude = venue.latitude;
-                var longitude = venue.longitude;
+                geocodeLocation(location);
             }
         }       
-    } }
+    } 
 
+    function geocodeLocation(location) {
+        console.log(location);
+    }
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
     function checkDate(start, end){
