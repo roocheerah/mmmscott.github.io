@@ -1,19 +1,3 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-mmmscott mmmscott
- 
-1  Watch 
-  Star 0
- Fork 1roocheerah/dubhacks
-forked from mmmscott/dubhacks
- branch: master  dubhacks / js / app.js
-roocheerahroocheerah 22 seconds ago Update app.js
-2 contributors mmmscottroocheerah
-204 lines (178 sloc)  6.901 kb RawBlameHistory   
 "use strict";
 
 function initialize() {
