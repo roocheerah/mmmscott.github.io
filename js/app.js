@@ -44,19 +44,16 @@ function initialize() {
 
     //function that parses the given facebook event info and tries to get out the description of it and the location
     function parseFacebookData(response) {
-        console.log(response);
         var name = response.name;
         var desc = response.description;
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
-        console.log(startTime + " ends at " + endTime);
-        if (checkTime(startTime, endTime)) {
+        var dateArray = startTime.split("T");
+        console.log(dateArray);
+      /*  if (checkTime(startTime, endTime)) {
             processData(desc, location);
-        }
-
-
-       // console.log(name + " " + location);
+        }*/
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
