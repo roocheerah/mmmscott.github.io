@@ -19,18 +19,18 @@ function initialize() {
     var eventLoc = [];
 
     function findEvents() {
-        FB.api('/search?q=Seattle&type=event', function(response) {
+        FB.api('/search?q=98105&type=event', function(response) {
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
             }
-           /*FB.api('/search?q=98195&type=event', function(response) {
+            FB.api('/search?q=98195&type=event', function(response) {
                 for (var i = 0; i < response.data.length; ++i) {
                     allEventIds.push(response.data[i].id);
                 }
-                FB.api('/search?q="UW Red Square"&type=event',function(response) {
+                FB.api('/search?q="98115"&type=event',function(response) {
                     for (var i = 0; i < response.data.length; ++i) {
                         allEventIds.push(response.data[i].id);
-                    }*/
+                    }
                     console.log(allEventIds);
                     for (var i = 0; i < allEventIds.length; ++i) {
                         FB.api("/" + allEventIds[i], function(response) {
@@ -38,8 +38,8 @@ function initialize() {
                         });   
                     }
                 });
-           /* });
-        });*/
+            });
+        });
     }
 
     //makes a new google maps object using the latitudes and longitudes
@@ -96,10 +96,6 @@ function initialize() {
                 var contentString = '<p>Start Date: ' + eventDate + '</p>' +
                     '<p>Event Name: ' + name + '</p>';
                 attachInfoWindow(marker, contentString);
-            }  else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-                setTimeout(function() {
-                    geocodeLocation(sDate, description, location, name);
-                }, 200);
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
