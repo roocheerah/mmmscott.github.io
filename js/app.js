@@ -78,7 +78,7 @@ function initialize() {
         console.log(location);  
         var geoCoder = new google.maps.Geocoder();
         var address = location;
-        geoCoder.gecode({'address': address}, function(results, status) {
+        geoCoder.geocode({'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             //map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
