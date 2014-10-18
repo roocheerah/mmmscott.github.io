@@ -31,6 +31,9 @@ function initialize() {
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
             }
+            for (var i = 0; i < allEventIds.length; ++i) {
+                processData(allEventIds[i]);
+            }
             console.log(allEventIds);
         });
     }
@@ -91,6 +94,7 @@ function initialize() {
     function processData(eventID){
         var url = "https://graph.facebook.com/" + eventID;
         var json = JSON.parse(this.responseText);
+        console.log(json);
         var description = json.description;
         var free = "free";
         var lines = description.split("\n");
