@@ -52,7 +52,7 @@ function initialize() {
         var endTime = response.end_time;
         console.log(startTime + " ends at " + endTime);
         if (checkTime(startTime, endTime)) {
-            processData(description, location);
+            processData(desc, location);
         }
 
 
