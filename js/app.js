@@ -144,7 +144,7 @@ function initialize() {
         }else if (hour == currentdate.getHours()) {
             if(min < currentdate.getMinutes()){
                 return false;
-            }else if(min == currentdate.getMinutes(){
+            }else if(min == currentdate.getMinutes()){
                 return (sec - currentdate.getSeconds() >= 0);
             }else{
                 return true;
