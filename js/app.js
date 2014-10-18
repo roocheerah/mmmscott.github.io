@@ -26,7 +26,7 @@ function initialize() {
     find.addEventListener("click", test);//fetchLocationInfo);
     
     function test() {
-        FB.api('/me', function(response) {
+        FB.api('/search?q="98105"&type=event', function(response) {
     console.log(JSON.stringify(response));
 });
     }
