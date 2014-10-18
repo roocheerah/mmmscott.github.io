@@ -70,7 +70,7 @@ function initialize() {
     } 
 
     function geocodeLocation(location) {
-        console.log(location);
+        console.log(location);  
     }
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
