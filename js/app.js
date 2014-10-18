@@ -32,7 +32,11 @@ function initialize() {
                 allEventIds.push(response.data[i].id);
             }
             for (var i = 0; i < allEventIds.length; ++i) {
-                processData(allEventIds[i]);
+                var url = "https://graph.facebook.com/" + allEventIds[i];
+                var request = new XMLHttpRequest();
+                request.onload = processData;
+                request.open("GET", url, true);
+                request.send();
             }
             console.log(allEventIds);
         });
@@ -91,8 +95,8 @@ function initialize() {
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
-    function processData(eventID){
-        var url = "https://graph.facebook.com/" + eventID;
+    function processData(){
+        if (this.status == 200) { 
         var json = JSON.parse(this.responseText);
         console.log(json);
         var description = json.description;
