@@ -51,12 +51,12 @@ function initialize() {
         var endTime = response.end_time;
 
         if (checkTime(startTime, endTime)) {
-            processData(desc, location);
+            processData(startTime, desc, location);
         }
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
-    function processData(description, location) {
+    function processData(sDate, description, location) {
         if (description) {
             var free = "free";
             var lines = description.split("\n");
@@ -66,7 +66,7 @@ function initialize() {
                 if (wordsInTitle) {
                     for (var j = 0; j < wordsInTitle.length; j++) {
                         if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                            geocodeLocation(location);
+                            geocodeLocation(sDate, description, location);
                         }
                     }
                 }
@@ -74,20 +74,36 @@ function initialize() {
         }
     } 
 
-    function geocodeLocation(location) {
+    function geocodeLocation(sDate, description, location) {
         console.log(location);  
         var geoCoder = new google.maps.Geocoder();
         var address = location;
         geoCoder.geocode({'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            //map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+            if (status == google.maps.GeocoderStatus.OK) {
+                //map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+                var eventDate = sdate.split("T")[0];
+                var contentString = '<p>Start Date: ' + eventDate + '</p>' +
+                    '<p>Description: ' + description + '</p>';
+                attachInfoWindow(marker, contentString);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    //attach info window to given marker
+    function attachInfoWindow(marker, contentString) {
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentString,
+            minWidth: 100   
+        });
+
+        google.maps.event.addListener(marker, "click", function () {
+            infoWindow.open(map, marker);
         });
     }
 
