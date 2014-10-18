@@ -49,7 +49,7 @@ function initialize() {
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
-        
+
         if (checkTime(startTime, endTime)) {
             processData(desc, location);
         }
@@ -66,7 +66,7 @@ function initialize() {
         for (var i = 0; i < lines.length; i++) {    
             var wordsInTitle = lines[i].split(" ");
             console.log(wordsInTitle);
-            if (wordsInTitle.length > 1) {
+            if (wordsInTitle) {
                 if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
                     geocodeLocation(location);
                 }
