@@ -51,8 +51,9 @@ function initialize() {
         var endTime = response.end_time;
 
         var startDateArray = startTime.split("T");
+        var endDateArray;
         if (endTime) { 
-            var endDateArray = endTime.split("T");
+            endDateArray = endTime.split("T");
         }
 
         console.log(startDateArray + endDateArray);
