@@ -23,12 +23,15 @@ function initialize() {
 
     //add events
     
-    find.addEventListener("click", findEvents);//fetchLocationInfo);
-    
+    find.addEventListener("click", findEvents);
+    var allEventIds = [];
+
     function findEvents() {
         FB.api('/search?q="98105"&type=event', function(response) {
-            console.log(response);
-            console.log(response.data[0].id);
+            for (var i = 0; i < response.data.length; ++i) {
+                allEventIds.push(response.data[i].id);
+            }
+            console.log(allEventIds);
         });
     }
 
