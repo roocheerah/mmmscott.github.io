@@ -1,46 +1,6 @@
 "use strict";
 
-function initalizeFB() {
-    function statusChangeCallback(response) {
-                
-                if (response.status === 'connected') {
-                    // Logged into your app and Facebook.
-                    var accessKey = response.authResponse.accessToken;
-                    console.log(accessKey);
-                } else if (response.status === 'not_authorized') {
-                    
-                } else {
-                    
-                }
-            }
-            function checkLoginState() {
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-            }
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId      : '955986817751920',
-                    xfbml      : true,
-                    version    : 'v2.1'
-                });
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-                
-                
-            };
 
-
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-}
 
 function initialize() {
     //initialize map on UW
@@ -240,6 +200,7 @@ function initialize() {
             });
         }); //end addListener
     }
+    console.log(accessKey + " on final line");
 }
 
 
