@@ -23,22 +23,14 @@ function initialize() {
 
     //add events
     
-    find.addEventListener("click", test);//fetchLocationInfo);
+    find.addEventListener("click", findEvents);//fetchLocationInfo);
     
-    function test() {
+    function findEvents() {
         FB.api('/search?q="98105"&type=event', function(response) {
-    console.log(JSON.stringify(response));
-});
+            var data = JSON.parse(response.responseText);
+        });
     }
-    //fetches the location info from the url address
-    function fetchLocationInfo() {
-        /*var url = 
 
-        var request = new XMLHttpRequest();
-        request.onload = parseResponse;
-        request.open("GET", url, true);
-        request.send();*/
-    }
 
     //parses the entered response in the search box
     function parseResponse() {

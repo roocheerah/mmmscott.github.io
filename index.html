@@ -22,11 +22,10 @@
                 	console.log("connected!");
                     // Logged into your app and Facebook.
                     accessKey = response.authResponse.accessToken;
-                    console.log(accessKey);
                 } else if (response.status === 'not_authorized') {
-                    
+                    console.log("needs to log into app");
                 } else {
-                    
+                    console.log("needs to log into fb");
                 }
             }
             function checkLoginState() {
