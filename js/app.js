@@ -63,6 +63,7 @@ function initialize() {
         if (description) {
         var free = "free";
         var lines = description.split("\n");
+        console.log(lines);
         for (var i = 0; i < lines.length; i++) {    
             var wordsInTitle = lines[i].split(" ");
             console.log(wordsInTitle);
