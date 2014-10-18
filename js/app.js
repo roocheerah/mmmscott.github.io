@@ -43,7 +43,7 @@ function initialize() {
             var lat = data.results[0].geometry.location.lat;
             var lng = data.results[0].geometry.location.lng;
             makeGoogleMapObject(lat, lng);
-            }); 
+            } 
 
             var closeEvents = [];
 
