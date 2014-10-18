@@ -50,6 +50,7 @@ function initialize() {
     function parseFacebookData(response) {
         var name = response.name;
         var desc = response.description;
+        console.log(desc);
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
