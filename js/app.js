@@ -27,7 +27,7 @@ function initialize() {
     
     function findEvents() {
         FB.api('/search?q="98105"&type=event', function(response) {
-            var data = JSON.parse(response.responseText);
+            var data = JSON.parse(response);
         });
     }
 
