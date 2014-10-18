@@ -49,7 +49,7 @@ function initialize() {
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
-        console.log(startTime + " ends at " + endTime);
+        
         if (checkTime(startTime, endTime)) {
             processData(desc, location);
         }
