@@ -15,10 +15,11 @@
 	<body>
 		<script>
 			var accessKey;
-			function initalizeFB() {
+			
     			function statusChangeCallback(response) {
                 
                 if (response.status === 'connected') {
+                	console.log("connected!");
                     // Logged into your app and Facebook.
                     accessKey = response.authResponse.accessToken;
                     console.log(accessKey);
@@ -55,7 +56,7 @@
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-}
+
 			
 		  
 		</script>
