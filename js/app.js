@@ -42,7 +42,6 @@ function initalizeFB() {
 }
 
 function initialize() {
-    initializeFB();
     //initialize map on UW
     var mapOptions = {
         center: { lat: 47.6550, lng: -122.3080},
