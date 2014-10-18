@@ -54,7 +54,7 @@ function initialize() {
         }
 
 
-        console.log(name + " " + location);
+       // console.log(name + " " + location);
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
