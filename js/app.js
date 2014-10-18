@@ -67,6 +67,7 @@ function initialize() {
             var wordsInTitle = lines[i].split(" ");
             console.log(wordsInTitle);
             if (wordsInTitle) {
+                console.log("passed stuff");
                 if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
                     geocodeLocation(location);
                 }
