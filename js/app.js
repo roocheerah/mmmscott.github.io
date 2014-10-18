@@ -50,7 +50,6 @@ function initialize() {
     function parseFacebookData(response) {
         var name = response.name;
         var desc = response.description;
-        console.log(desc);
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
@@ -79,6 +78,7 @@ function initialize() {
     } 
 
     function geocodeLocation(sDate, description, location, name) {
+        console.log(name + " " + description);
         var geoCoder = new google.maps.Geocoder();
         var address = location;
         geoCoder.geocode({'address': address}, function(results, status) {
