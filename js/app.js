@@ -19,23 +19,25 @@ function initialize() {
     //load objects
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
-    var add = document.getElementById('add');
     var find = document.getElementById('find');
-    var zip = document.getElementById('zip');
 
     //add events
-    add.addEventListener("click", addMarkerListener);
-    find.addEventListener("click", fetchLocationInfo);
     
+    find.addEventListener("click", test);//fetchLocationInfo);
+    
+    function test() {
+        FB.api('/me', function(response) {
+    console.log(JSON.stringify(response));
+});
+    }
     //fetches the location info from the url address
     function fetchLocationInfo() {
-        var url = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:" +
-            zip.value + "&key=AIzaSyCqN2adCmsc3ov72hoOy6GKseL1p1_JmJs";
+        /*var url = 
 
         var request = new XMLHttpRequest();
         request.onload = parseResponse;
         request.open("GET", url, true);
-        request.send();
+        request.send();*/
     }
 
     //parses the entered response in the search box
@@ -200,7 +202,6 @@ function initialize() {
             });
         }); //end addListener
     }
-    console.log(accessKey + " on final line");
 }
 
 
