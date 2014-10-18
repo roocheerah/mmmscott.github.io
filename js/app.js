@@ -57,7 +57,6 @@ function initialize() {
                 }
             }          
             addExistingEvents(closeEvents);
-        }
     }
 
 
@@ -199,6 +198,6 @@ function initialize() {
             });
         }); //end addListener
     }
-    
+}
 
 google.maps.event.addDomListener(window, 'load', initialize);
