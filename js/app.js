@@ -19,14 +19,14 @@ function initialize() {
     var eventLoc = [];
 
     function findEvents() {
-    	//document.getElementById('map-canvas').style.visibility = "visible";
-    	//document.getElementById('moveLeft').style.width = "35%";
-    	//document.getElementById('moveLeft').style.float = "left";
-    	//document.getElementById('map-canvas').style.float = "right";
-    	//document.getElementById('map-canvas').style.width = "60%";
-    	//document.getElementById('body').style.paddingTop = "0";
-    	document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
-    	document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
+    	document.getElementById('map-canvas').style.visibility = "visible";
+    	document.getElementById('moveLeft').style.width = "35%";
+    	document.getElementById('moveLeft').style.float = "left";
+    	document.getElementById('map-canvas').style.float = "right";
+    	document.getElementById('map-canvas').style.width = "60%";
+    	document.getElementById('body').style.paddingTop = "0";
+    	//document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
+    	//document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
 
         FB.api('/search?q=98105&type=event', function(response) {
             for (var i = 0; i < response.data.length; ++i) {
