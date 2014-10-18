@@ -49,8 +49,13 @@ function initialize() {
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
-        var dateArray = startTime.split("T");
-        console.log(dateArray);
+
+        var startDateArray = startTime.split("T");
+        if (endTime) { 
+            var endDateArray = endTime.split("T");
+        }
+
+        console.log(startDateArray + endDateArray);
       /*  if (checkTime(startTime, endTime)) {
             processData(desc, location);
         }*/
