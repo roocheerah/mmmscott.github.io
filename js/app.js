@@ -44,6 +44,7 @@ function initialize() {
 
     //function that parses the given facebook event info and tries to get out the description of it and the location
     function parseFacebookData(response) {
+        console.log(response);
         var name = response.name;
         var desc = response.description;
         var location = response.location;
