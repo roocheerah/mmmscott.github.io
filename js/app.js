@@ -35,7 +35,6 @@ function initialize() {
                         for (var i = 0; i < response.data.length; ++i) {
                             allEventIds.push(response.data[i].id);
                         }
-                        console.log(allEventIds);
                         for (var i = 0; i < allEventIds.length; ++i) {
                             FB.api("/" + allEventIds[i], function(response) {
                                 parseFacebookData(response);
@@ -88,7 +87,6 @@ function initialize() {
     } 
 
     function geocodeLocation(sDate, description, location, name) {
-        console.log(name + " " + description);
         var geoCoder = new google.maps.Geocoder();
         var address = location;
         geoCoder.geocode({'address': address}, function(results, status) {
@@ -177,28 +175,3 @@ function initialize() {
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-
-/*//parses the entered response in the search box
-    function parseResponse() {
-        if (this.status == 200) {
-            var data = JSON.parse(this.responseText);
-            var lat = data.results[0].geometry.location.lat;
-            var lng = data.results[0].geometry.location.lng;
-            makeGoogleMapObject(lat, lng);
-            } 
-
-            var closeEvents = [];
-
-            // computes distance from given zipcode to location - if within 3200 meters, shows them
-            for (var i = 0; i < exampleEvents.length; ++i) {
-                var existingLatLong = new google.maps.LatLng(exampleEvents[i][1],
-                exampleEvents[i][2]);
-                var dist = google.maps.geometry.spherical.computeDistanceBetween(existingLatLong, latLong);
-                if (Math.abs(dist) < 3200) {
-                    closeEvents.push(exampleEvents[i]);
-                }
-            }
-                  
-            addExistingEvents(closeEvents);
-    }*/
