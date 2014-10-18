@@ -19,6 +19,15 @@ function initialize() {
     var eventLoc = [];
 
     function findEvents() {
+    	//document.getElementById('map-canvas').style.visibility = "visible";
+    	//document.getElementById('moveLeft').style.width = "35%";
+    	//document.getElementById('moveLeft').style.float = "left";
+    	//document.getElementById('map-canvas').style.float = "right";
+    	//document.getElementById('map-canvas').style.width = "60%";
+    	//document.getElementById('body').style.paddingTop = "0";
+    	document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
+    	document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
+
         FB.api('/search?q=98105&type=event', function(response) {
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
@@ -27,21 +36,12 @@ function initialize() {
                 for (var i = 0; i < response.data.length; ++i) {
                     allEventIds.push(response.data[i].id);
                 }
-                FB.api('/search?q="98115"&type=event',function(response) {
-                    for (var i = 0; i < response.data.length; ++i) {
-                        allEventIds.push(response.data[i].id);
-                    }
-                    FB.api('/search?q="98103"&type=event',function(response) {
-                        for (var i = 0; i < response.data.length; ++i) {
-                            allEventIds.push(response.data[i].id);
-                        }
-                        for (var i = 0; i < allEventIds.length; ++i) {
-                            FB.api("/" + allEventIds[i], function(response) {
-                                parseFacebookData(response);
-                            });   
-                        }
-                    });
-                });
+                console.log(allEventIds);
+                for (var i = 0; i < allEventIds.length; ++i) {
+                    FB.api("/" + allEventIds[i], function(response) {
+                        parseFacebookData(response);
+                    });   
+                }
             });
         });
     }
@@ -59,6 +59,7 @@ function initialize() {
     function parseFacebookData(response) {
         var name = response.name;
         var desc = response.description;
+        console.log(desc);
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
@@ -77,7 +78,7 @@ function initialize() {
                 var wordsInTitle = lines[i].split(" ");
                 if (wordsInTitle) {
                     for (var j = 0; j < wordsInTitle.length; j++) {
-                        if (wordsInTitle[j].toLowerCase() == free) { // i did this because most events do not have free written in their name
+                        if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
                             geocodeLocation(sDate, description, location, name);
                         }
                     }
@@ -175,3 +176,28 @@ function initialize() {
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+/*//parses the entered response in the search box
+    function parseResponse() {
+        if (this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            var lat = data.results[0].geometry.location.lat;
+            var lng = data.results[0].geometry.location.lng;
+            makeGoogleMapObject(lat, lng);
+            } 
+
+            var closeEvents = [];
+
+            // computes distance from given zipcode to location - if within 3200 meters, shows them
+            for (var i = 0; i < exampleEvents.length; ++i) {
+                var existingLatLong = new google.maps.LatLng(exampleEvents[i][1],
+                exampleEvents[i][2]);
+                var dist = google.maps.geometry.spherical.computeDistanceBetween(existingLatLong, latLong);
+                if (Math.abs(dist) < 3200) {
+                    closeEvents.push(exampleEvents[i]);
+                }
+            }
+                  
+            addExistingEvents(closeEvents);
+    }*/
