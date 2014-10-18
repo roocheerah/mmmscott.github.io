@@ -1,11 +1,14 @@
 "use strict";
 
+var accessKey;
+
 function initalizeFB() {
     function statusChangeCallback(response) {
                 
                 if (response.status === 'connected') {
                     // Logged into your app and Facebook.
-                    console.log("connected");
+                    accessKey = response.authResponse.accessToken;
+                    console.log(accessKey);
                 } else if (response.status === 'not_authorized') {
                     
                 } else {
