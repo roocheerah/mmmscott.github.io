@@ -42,31 +42,6 @@ function initialize() {
         });
     }
 
-
-    //parses the entered response in the search box
-    function parseResponse() {
-        if (this.status == 200) {
-            var data = JSON.parse(this.responseText);
-            var lat = data.results[0].geometry.location.lat;
-            var lng = data.results[0].geometry.location.lng;
-            makeGoogleMapObject(lat, lng);
-            } 
-
-            var closeEvents = [];
-
-            // computes distance from given zipcode to location - if within 3200 meters, shows them
-            for (var i = 0; i < exampleEvents.length; ++i) {
-                var existingLatLong = new google.maps.LatLng(exampleEvents[i][1],
-                exampleEvents[i][2]);
-                var dist = google.maps.geometry.spherical.computeDistanceBetween(existingLatLong, latLong);
-                if (Math.abs(dist) < 3200) {
-                    closeEvents.push(exampleEvents[i]);
-                }
-            }          
-            addExistingEvents(closeEvents);
-    }
-
-
     //makes a new google maps object using the latitudes and longitudes
     function makeGoogleMapObject(latitude, longitude){
         var latLong = new google.maps.LatLng(latitude, longitude);
@@ -110,7 +85,7 @@ function initialize() {
                 var longitude = venue.longitude;
             }
         }       
-    }
+    } }
 
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
@@ -210,3 +185,28 @@ function initialize() {
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+/*//parses the entered response in the search box
+    function parseResponse() {
+        if (this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            var lat = data.results[0].geometry.location.lat;
+            var lng = data.results[0].geometry.location.lng;
+            makeGoogleMapObject(lat, lng);
+            } 
+
+            var closeEvents = [];
+
+            // computes distance from given zipcode to location - if within 3200 meters, shows them
+            for (var i = 0; i < exampleEvents.length; ++i) {
+                var existingLatLong = new google.maps.LatLng(exampleEvents[i][1],
+                exampleEvents[i][2]);
+                var dist = google.maps.geometry.spherical.computeDistanceBetween(existingLatLong, latLong);
+                if (Math.abs(dist) < 3200) {
+                    closeEvents.push(exampleEvents[i]);
+                }
+            }
+                  
+            addExistingEvents(closeEvents);
+    }*/
