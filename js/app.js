@@ -67,8 +67,10 @@ function initialize() {
         for (var i = 0; i < lines.length; i++) {    
             var wordsInTitle = lines[i].split(" ");
             console.log(wordsInTitle);
-            if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                geocodeLocation(location);
+            if (wordsInTitle.length > 1) {
+                if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
+                    geocodeLocation(location);
+                }
             }
         }       
     }
