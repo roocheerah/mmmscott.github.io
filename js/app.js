@@ -1,9 +1,9 @@
 "use strict";
 
 function initialize() {
-	//initialize map on UW
+    //initialize map on UW
     var mapOptions = {
-    	center: { lat: 47.6550, lng: -122.3080},
+        center: { lat: 47.6550, lng: -122.3080},
         zoom: 15
     };
 
@@ -16,7 +16,7 @@ function initialize() {
 
     //load objects
     var map = new google.maps.Map(document.getElementById('map-canvas'),
-    	mapOptions);
+        mapOptions);
     var add = document.getElementById('add');
     var find = document.getElementById('find');
     var zip = document.getElementById('zip');
@@ -25,6 +25,7 @@ function initialize() {
     add.addEventListener("click", addMarkerListener);
     find.addEventListener("click", fetchLocationInfo);
     
+    //fetches the location info from the url address
     function fetchLocationInfo() {
         var url = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:" +
             zip.value + "&key=AIzaSyCqN2adCmsc3ov72hoOy6GKseL1p1_JmJs";
@@ -35,17 +36,13 @@ function initialize() {
         request.send();
     }
 
+    //parses the entered response in the search box
     function parseResponse() {
         if (this.status == 200) {
             var data = JSON.parse(this.responseText);
             var lat = data.results[0].geometry.location.lat;
             var lng = data.results[0].geometry.location.lng;
-
-            var latLong = new google.maps.LatLng(lat,lng);
-            var marker = new google.maps.Marker({
-                position: latLong,
-                map: map,
-                title: "Your entered zip!"
+            makeGoogleMapObject(lat, lng);
             }); 
 
             var closeEvents = [];
@@ -58,11 +55,51 @@ function initialize() {
                 if (Math.abs(dist) < 3200) {
                     closeEvents.push(exampleEvents[i]);
                 }
-            }
-            
+            }          
             addExistingEvents(closeEvents);
         }
     }
+
+
+    //makes a new google maps object using the latitudes and longitudes
+    function makeGoogleMapObject(latitude, longitude){
+        var latLong = new google.maps.LatLng(latitude, longitude);
+        var marker = new google.maps.Marker({
+            position: latLong,
+            map: map
+    }
+
+    //function that parses the given facebook event info and tries to get out the description of it and the location
+    function parseFacebookData(){
+        if (this.status == 200) {
+            var json = JSON.parse(this.responseText);
+            var eventElm = json.data;
+            for (var i = 0; i < eventElm.length; i++) {
+                var name = eventElm[i].name;
+                var location = eventElm[i].location;
+                var eventID = eventElm[i].id;
+                processData(eventID);
+            }
+        }
+    }
+
+    //helper method for processing Facebook event data if the key word of "free" was found in it
+    function processData(eventID){
+        var url = "https://graph.facebook.com/" + eventID;
+        var json = JSON.parse(this.responseText);
+        var description = json.description;
+        var free = "free";
+        var lines = description.split("\n");
+        for (var i = 0; i < lines.length; i++) {    
+            var wordsInTitle = lines[i].split(" ");
+            if (wordsInTitle[i].toLowerCase() === free) { // i did this because most events do not have free written in their name
+                var venue = json.venue;                     //it is usually in their description....
+                var latitude = venue.latitude;
+                var longitude = venue.longitude;
+            }
+        }       
+    }
+
 
     //add markers for list of existing events
     function addExistingEvents(eventsArray) {
@@ -95,7 +132,7 @@ function initialize() {
     }
 
     //allows add button to add event at location clicked on 
-	function addMarkerListener() {
+    function addMarkerListener() {
         google.maps.event.addListener(map, "click", function (event) {
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();
