@@ -67,10 +67,11 @@ function initialize() {
         var marker = new google.maps.Marker({
             position: latLong,
             map: map
+        });
     }
 
     //function that parses the given facebook event info and tries to get out the description of it and the location
-    function parseFacebookData(){
+    function parseFacebookData() {
         if (this.status == 200) {
             var json = JSON.parse(this.responseText);
             var eventElm = json.data;
