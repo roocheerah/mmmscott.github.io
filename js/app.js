@@ -97,8 +97,7 @@ function initialize() {
                     position: results[0].geometry.location
                 });
                 var eventDate = sDate.split("T")[0];
-                var contentString = '<p>Start Date: ' + eventDate + '</p>' +
-                    '<p>Event Name: ' + name + '</p>';
+                var contentString = '<p id="eventName">Event: ' + name + '</p>' + '<p id = "startTime">Starts at: ' + eventDate + '!</p>' ;
                 attachInfoWindow(marker, contentString);
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
