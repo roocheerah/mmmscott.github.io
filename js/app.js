@@ -49,17 +49,13 @@ function initialize() {
         var location = response.location;
         var startTime = response.start_time;
         var endTime = response.end_time;
-
-        var startDateArray = startTime.split("T");
-        var endDateArray;
-        if (endTime) { 
-            endDateArray = endTime.split("T");
+        console.log(startTime + " ends at " + endTime);
+        if (checkTime(startTime, endTime)) {
+            processData(desc, location);
         }
 
-        console.log(startDateArray + endDateArray);
-      /*  if (checkTime(startTime, endTime)) {
-            processData(desc, location);
-        }*/
+
+       // console.log(name + " " + location);
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
