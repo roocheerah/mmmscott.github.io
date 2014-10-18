@@ -85,7 +85,7 @@ function initialize() {
                     map: map,
                     position: results[0].geometry.location
                 });
-                var eventDate = sdate.split("T")[0];
+                var eventDate = sDate.split("T")[0];
                 var contentString = '<p>Start Date: ' + eventDate + '</p>' +
                     '<p>Description: ' + description + '</p>';
                 attachInfoWindow(marker, contentString);
