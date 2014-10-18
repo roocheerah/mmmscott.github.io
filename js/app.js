@@ -96,6 +96,10 @@ function initialize() {
                 var contentString = '<p>Start Date: ' + eventDate + '</p>' +
                     '<p>Event Name: ' + name + '</p>';
                 attachInfoWindow(marker, contentString);
+            }  else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+                setTimeout(function() {
+                    geocodeLocation(sDate, description, location, name);
+                }, 200);
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
