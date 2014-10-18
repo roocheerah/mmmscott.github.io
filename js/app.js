@@ -9,13 +9,6 @@ function initialize() {
         zoom: 15
     };
 
-    //example events
-    var exampleEvents = [
-        ['Suzzallo Library', 47.6557, -122.3084, "Free food! Aww yeah."], 
-        ['Odegaard Library', 47.6567, -122.3103, "Free food at midnight!"],
-        ['The HUB', 47.6553, -122.3051, "There's always food here!"]
-    ];
-
     //load objects
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
@@ -25,6 +18,7 @@ function initialize() {
     
     find.addEventListener("click", findEvents);
     var allEventIds = [];
+    var eventLoc = [];
 
     function findEvents() {
         FB.api('/search?q="98105"&type=event', function(response) {
@@ -33,7 +27,7 @@ function initialize() {
             }
             for (var i = 0; i < allEventIds.length; ++i) {
                 FB.api("/" + allEventIds[i], function(response) {
-                    console.log(response);
+                    parseFacebookData(response);
                 });
                 
             }
@@ -51,11 +45,12 @@ function initialize() {
     }
 
     //function that parses the given facebook event info and tries to get out the description of it and the location
-    function parseFacebookData() {
-        if (this.status == 200) {
-            var json = JSON.parse(this.responseText);
-            var eventElm = json.data;
-            for (var i = 0; i < eventElm.length; i++) {
+    function parseFacebookData(response) {
+        var desc = response.description;
+        var location = response.location;
+
+        console.log(desc + " " + location);
+           /* for (var i = 0; i < eventElm.length; i++) {
                 var name = eventElm[i].name;
                 var location = eventElm[i].location;
                 var eventID = eventElm[i].id;
@@ -64,8 +59,8 @@ function initialize() {
                 if (checkDate(start_time, end_time)) {
                     processData(eventID);
                 }
-            }
-        }
+            }*/
+        
     }
 
     //helper method for processing Facebook event data if the key word of "free" was found in it
@@ -136,50 +131,6 @@ function initialize() {
     }
 
 
-    //add markers for list of existing events
-    function addExistingEvents(eventsArray) {
-        for (var i = 0; i < eventsArray.length; ++i) {
-            var latLong = new google.maps.LatLng(eventsArray[i][1],
-                eventsArray[i][2]);
-            var title = eventsArray[i][0];
-
-            var marker = new google.maps.Marker({
-                position: latLong,
-                map: map,
-                title: title
-            });
-            var contentString = eventsArray[i][3];
-
-            attachInfoWindow(marker, contentString);
-        }
-    }
-    
-    //attach info window to given marker
-    function attachInfoWindow(marker, contentString) {
-        var infoWindow = new google.maps.InfoWindow({
-            content: contentString,
-            minWidth: 100   
-        });
-
-        google.maps.event.addListener(marker, "click", function () {
-            infoWindow.open(map, marker);
-        });
-    }
-
-    //allows add button to add event at location clicked on 
-    function addMarkerListener() {
-        google.maps.event.addListener(map, "click", function (event) {
-            var latitude = event.latLng.lat();
-            var longitude = event.latLng.lng();
-            var clickLatLong = new google.maps.LatLng(latitude,longitude);
-
-            var marker = new google.maps.Marker({
-                position: clickLatLong,
-                map: map,
-                title: "A new marker!"
-            });
-        }); //end addListener
-    }
 }
 
 
