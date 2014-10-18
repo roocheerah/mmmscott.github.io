@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 function initialize() {
     //initialize map on UW
     var mapOptions = {
@@ -21,17 +19,22 @@ function initialize() {
     var eventLoc = [];
 
     function findEvents() {
-        FB.api('/search?q="98105"&type=event', function(response) {
+        FB.api('/search?q=98195&type=event', function(response) {
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
             }
-            console.log(allEventIds);
-            for (var i = 0; i < allEventIds.length; ++i) {
-                FB.api("/" + allEventIds[i], function(response) {
-                    parseFacebookData(response);
-                });   
+        });
+        FB.api('/search?q=98195&type=event', function(response) {
+            for (var i = 0; i < response.data.length; ++i) {
+                allEventIds.push(response.data[i].id);
             }
         });
+        console.log(allEventIds);
+        for (var i = 0; i < allEventIds.length; ++i) {
+            FB.api("/" + allEventIds[i], function(response) {
+                parseFacebookData(response);
+            });   
+        }
     }
 
     //makes a new google maps object using the latitudes and longitudes
@@ -61,7 +64,6 @@ function initialize() {
         if (description) {
             var free = "free";
             var lines = description.split("\n");
-            console.log(lines);
             for (var i = 0; i < lines.length; i++) {    
                 var wordsInTitle = lines[i].split(" ");
                 if (wordsInTitle) {
@@ -76,12 +78,10 @@ function initialize() {
     } 
 
     function geocodeLocation(sDate, description, location, name) {
-        console.log(location);  
         var geoCoder = new google.maps.Geocoder();
         var address = location;
         geoCoder.geocode({'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                //map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
